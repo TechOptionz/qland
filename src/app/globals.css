@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Brand tokens — taken from the Claude Design source (Qland Property Redesign).
+   --------------------------------------------------------------------------- */
+@theme {
+  --color-ink: #16130e;
+  --color-ink-soft: #24201a;
+  --color-cream: #fbf8f3;
+  --color-line: #eae2d4;
+  --color-tint: #fbf3e4;
+  --color-amber: #f0a63c;
+  --color-amber-light: #f6b352;
+  --color-amber-dark: #e89a2b;
+  --color-body: #5c5344;
+  --color-body-strong: #3d362b;
+  --color-muted: #8a7d63;
+  --color-muted-soft: #b7a88c;
+
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+
+  /* Extra breakpoints matching the viewport thresholds used in the design. */
+  --breakpoint-mdx: 53.75rem; /* 860px — location split */
+  --breakpoint-nav: 60rem; /* 960px — desktop nav vs. burger menu */
+  --breakpoint-wide: 68.75rem; /* 1100px — 4-up feature grid */
+}
+
+/* These must live in `base`. Unlayered rules outrank every `@layer`, so a bare
+   `a { color: inherit }` here would silently beat all `text-*` utilities on
+   links — making e.g. `text-cream` on a dark button a no-op. */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Sticky header is ~76px; keep anchored sections clear of it. */
+    scroll-padding-top: 84px;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Layout helpers. The design uses the same fluid gutter and 1280px shell on
+   every section, so they are expressed once here instead of per element.
+   --------------------------------------------------------------------------- */
+@utility gutter-x {
+  padding-inline: clamp(20px, 5vw, 64px);
+}
+
+@utility shell {
+  max-width: 1280px;
+  margin-inline: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/** Vertical rhythm for the large content bands. */
+@utility band-y {
+  padding-block: clamp(56px, 8vw, 110px);
+}
+
+/** Slightly tighter band, used by the reviews strip and the project page. */
+@utility band-y-sm {
+  padding-block: clamp(44px, 6vw, 80px);
+}
+
+@utility eyebrow {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+@utility section-title {
+  margin: 0;
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-wrap: pretty;
+}
+
+@utility pill-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 13px 26px;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    border-color 150ms ease;
+}
