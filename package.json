@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "check:contrast": "node scripts/check-link-colors.mjs"
+    "check:contrast": "node scripts/check-link-colors.mjs",
+    "check:motion": "node scripts/check-motion.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.120.0",

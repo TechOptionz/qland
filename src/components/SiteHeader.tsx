@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import logo from "../../public/assets/qland-logo.png";
 
 type NavLink = { label: string; href: string };
@@ -23,7 +23,42 @@ export default function SiteHeader({
   active: "home" | "boutique";
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const progressRef = useRef<HTMLDivElement>(null);
   const close = () => setMenuOpen(false);
+
+  // Condense the bar once the page has moved, and drive the progress rail along
+  // its bottom edge. Both read the same scroll position, so they share one
+  // rAF-throttled listener; the rail is written straight to the DOM to keep the
+  // per-frame work off React.
+  useEffect(() => {
+    let frame = 0;
+
+    const paint = () => {
+      frame = 0;
+      const y = window.scrollY;
+      setScrolled(y > 8);
+
+      const rail = progressRef.current;
+      if (rail) {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        rail.style.transform = `scaleX(${max > 0 ? Math.min(y / max, 1) : 0})`;
+      }
+    };
+
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(paint);
+    };
+
+    paint();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, []);
 
   const isHome = active === "home";
   const contactHref = isHome ? "/#contact" : "#register";
@@ -36,9 +71,30 @@ export default function SiteHeader({
   ];
 
   return (
-    <header className="gutter-x sticky top-0 z-50 flex flex-wrap items-center justify-between gap-6 border-b border-line bg-cream/95 py-3.5 backdrop-blur-md">
+    <header
+      className={`gutter-x sticky top-0 z-50 flex flex-wrap items-center justify-between gap-6 border-b border-line backdrop-blur-md transition-[padding,background-color,box-shadow] duration-300 ease-out ${
+        scrolled
+          ? "bg-cream/92 py-2 shadow-[0_10px_30px_rgba(22,19,14,0.08)]"
+          : "bg-cream/95 py-3.5 shadow-none"
+      }`}
+    >
+      {/* Reading progress. Anchored to the header's bottom border so it reads as
+          the border filling in rather than a separate stripe. */}
+      <div
+        ref={progressRef}
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 -bottom-px h-[2px] origin-left scale-x-0 bg-amber"
+      />
+
       <Link href="/" className="flex items-center" aria-label="QLand Property home">
-        <Image src={logo} alt="QLand Property" priority className="h-12 w-auto" />
+        <Image
+          src={logo}
+          alt="QLand Property"
+          priority
+          className={`w-auto transition-[height] duration-300 ease-out ${
+            scrolled ? "h-10" : "h-12"
+          }`}
+        />
       </Link>
 
       <button
@@ -112,7 +168,7 @@ export default function SiteHeader({
       {menuOpen && (
         <nav
           id="mobile-nav"
-          className="mt-3 flex basis-full flex-col gap-1 border-t border-line pt-2.5 pb-3.5 text-[15px] font-semibold nav:hidden"
+          className="rise-in mt-3 flex basis-full flex-col gap-1 border-t border-line pt-2.5 pb-3.5 text-[15px] font-semibold [animation-duration:320ms] nav:hidden"
         >
           {mainLinks.slice(0, 2).map((link) => (
             <Link

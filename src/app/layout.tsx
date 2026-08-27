@@ -36,7 +36,14 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en-AU" className={montserrat.variable}>
-      <body>{children}</body>
+      <body>
+        {/* Scroll reveals start hidden in the HTML. Without JS the observer
+            never runs, so force everything visible for those readers. */}
+        <noscript>
+          <style>{`.reveal{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+        {children}
+      </body>
     </html>
   );
 }

@@ -58,7 +58,7 @@ export default function ChatWidget() {
   return (
     <div className="fixed right-5 bottom-5 z-100 flex flex-col items-end gap-3">
       {open && (
-        <div className="flex h-[480px] max-h-[calc(100vh-120px)] w-[min(360px,calc(100vw-40px))] flex-col overflow-hidden rounded-[18px] border border-line bg-white shadow-[0_24px_60px_rgba(22,19,14,0.25)]">
+        <div className="pop-in flex h-[480px] max-h-[calc(100vh-120px)] w-[min(360px,calc(100vw-40px))] flex-col overflow-hidden rounded-[18px] border border-line bg-white shadow-[0_24px_60px_rgba(22,19,14,0.25)]">
           <div className="flex items-center gap-3 bg-ink px-[18px] py-4 text-cream">
             <span className="flex h-9 w-9 items-center justify-center rounded-full bg-amber font-extrabold text-ink">
               Q
@@ -80,7 +80,7 @@ export default function ChatWidget() {
             {messages.map((m, i) => (
               <div
                 key={i}
-                className={`max-w-[85%] rounded-[14px] px-3.5 py-2.5 text-[13.5px] leading-[1.55] whitespace-pre-wrap ${
+                className={`rise-in max-w-[85%] rounded-[14px] px-3.5 py-2.5 text-[13.5px] leading-[1.55] whitespace-pre-wrap [animation-duration:300ms] ${
                   m.role === "user"
                     ? "self-end bg-amber text-ink"
                     : "self-start border border-line bg-white text-body-strong"
@@ -90,7 +90,7 @@ export default function ChatWidget() {
               </div>
             ))}
             {thinking && (
-              <div className="self-start rounded-[14px] border border-line bg-white px-3.5 py-2.5 text-[13.5px] text-muted">
+              <div className="rise-in self-start rounded-[14px] border border-line bg-white px-3.5 py-2.5 text-[13.5px] text-muted [animation-duration:300ms]">
                 Typing…
               </div>
             )}
@@ -127,7 +127,7 @@ export default function ChatWidget() {
         onClick={() => setOpen((o) => !o)}
         aria-label={open ? "Close chat" : "Chat with us"}
         aria-expanded={open}
-        className="flex h-[58px] w-[58px] cursor-pointer items-center justify-center rounded-full bg-amber text-2xl text-ink shadow-[0_12px_30px_rgba(240,166,60,0.5)] transition-colors hover:bg-ink hover:text-amber-light"
+        className="flex h-[58px] w-[58px] cursor-pointer items-center justify-center rounded-full bg-amber text-2xl text-ink shadow-[0_12px_30px_rgba(240,166,60,0.5)] transition-[background-color,color,scale] duration-200 hover:scale-105 hover:bg-ink hover:text-amber-light active:scale-95 motion-reduce:transition-none motion-reduce:hover:scale-100"
       >
         {open ? "✕" : "💬"}
       </button>

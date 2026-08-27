@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 const inputClass =
-  "rounded-xl border-none bg-cream px-[18px] py-[15px] text-sm outline-none focus:ring-2 focus:ring-ink/30";
+  "rounded-xl border-none bg-cream px-[18px] py-[15px] text-sm outline-none transition-[box-shadow,background-color] duration-200 focus:bg-white focus:ring-2 focus:ring-ink/30";
 
 export default function RegisterInterestForm() {
   const [sent, setSent] = useState(false);
@@ -38,7 +38,10 @@ export default function RegisterInterestForm() {
 
   if (sent) {
     return (
-      <div className="rounded-[14px] bg-ink px-6 py-5 text-[15px] font-bold text-amber-light">
+      <div
+        role="status"
+        className="pop-in rounded-[14px] bg-ink px-6 py-5 text-[15px] font-bold text-amber-light"
+      >
         Thank you — we&apos;ll be in touch shortly. For anything urgent, call 0423 584 690.
       </div>
     );
@@ -92,14 +95,14 @@ export default function RegisterInterestForm() {
         <button
           type="submit"
           disabled={pending}
-          className="cursor-pointer rounded-xl bg-ink px-[18px] py-[15px] text-sm font-extrabold text-cream transition-colors hover:bg-cream hover:text-ink disabled:opacity-60"
+          className="cursor-pointer rounded-xl bg-ink px-[18px] py-[15px] text-sm font-extrabold text-cream transition-[background-color,color,scale] duration-200 hover:bg-cream hover:text-ink active:scale-[0.98] disabled:opacity-60 motion-reduce:transition-none motion-reduce:active:scale-100"
         >
           {pending ? "Sending…" : "Register"}
         </button>
       </div>
 
       {error && (
-        <p role="alert" className="m-0 text-[13px] font-semibold text-ink">
+        <p role="alert" className="rise-in m-0 text-[13px] font-semibold text-ink [animation-duration:300ms]">
           {error}
         </p>
       )}

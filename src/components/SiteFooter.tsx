@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Reveal from "@/components/Reveal";
 import { site } from "@/lib/site";
 
 const linkClass = "text-cream/80 transition-colors hover:text-amber-light";
@@ -31,8 +32,8 @@ export function SiteFooter() {
       className="gutter-x mt-auto bg-ink pt-[clamp(48px,7vw,90px)] pb-9 text-cream"
     >
       <div className="shell flex flex-col gap-12">
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-9">
-          <div className="flex flex-col gap-4">
+        <Reveal className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-9">
+          <div className="stagger-item flex flex-col gap-4">
             <span className="text-xl font-extrabold tracking-[0.06em]">
               <span className="text-amber-light">QLAND</span> PROPERTY
             </span>
@@ -79,7 +80,10 @@ export function SiteFooter() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-3 text-sm">
+          <div
+            className="stagger-item flex flex-col gap-3 text-sm"
+            style={{ transitionDelay: "110ms" }}
+          >
             <span className="text-xs font-extrabold tracking-[0.16em] text-amber-light uppercase">
               About
             </span>
@@ -97,7 +101,10 @@ export function SiteFooter() {
             </Link>
           </div>
 
-          <div className="flex flex-col gap-3 text-sm">
+          <div
+            className="stagger-item flex flex-col gap-3 text-sm"
+            style={{ transitionDelay: "220ms" }}
+          >
             <span className="text-xs font-extrabold tracking-[0.16em] text-amber-light uppercase">
               Solutions
             </span>
@@ -115,7 +122,10 @@ export function SiteFooter() {
             </Link>
           </div>
 
-          <div className="flex flex-col gap-3 text-sm">
+          <div
+            className="stagger-item flex flex-col gap-3 text-sm"
+            style={{ transitionDelay: "330ms" }}
+          >
             <span className="text-xs font-extrabold tracking-[0.16em] text-amber-light uppercase">
               Get in touch
             </span>
@@ -133,9 +143,12 @@ export function SiteFooter() {
               {site.address.line3}
             </span>
           </div>
-        </div>
+        </Reveal>
 
-        <div className="flex flex-wrap justify-between gap-3 border-t border-cream/15 pt-[22px] text-[12.5px] text-cream/55">
+        <Reveal
+          variant="fade"
+          className="flex flex-wrap justify-between gap-3 border-t border-cream/15 pt-[22px] text-[12.5px] text-cream/55"
+        >
           <span>©{new Date().getFullYear()} by QLAND</span>
           <span className="flex gap-5">
             <Link href="/#contact" className="hover:text-cream">
@@ -145,7 +158,7 @@ export function SiteFooter() {
               Privacy Policy
             </Link>
           </span>
-        </div>
+        </Reveal>
       </div>
     </footer>
   );
@@ -155,7 +168,10 @@ export function SiteFooter() {
 export function ProjectFooter() {
   return (
     <footer className="gutter-x mt-auto bg-ink py-9 text-cream">
-      <div className="shell flex flex-wrap items-center justify-between gap-4">
+      <Reveal
+        variant="fade"
+        className="shell flex flex-wrap items-center justify-between gap-4"
+      >
         <span className="text-base font-extrabold tracking-[0.06em]">
           <span className="text-amber-light">QLAND</span> PROPERTY
         </span>
@@ -170,7 +186,7 @@ export function ProjectFooter() {
         <span className="text-[12.5px] text-cream/55">
           ©{new Date().getFullYear()} by QLAND
         </span>
-      </div>
+      </Reveal>
     </footer>
   );
 }
