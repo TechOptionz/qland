@@ -32,7 +32,19 @@ if (!CHROME) {
 const browser = await puppeteer.launch({ executablePath: CHROME, headless: true });
 let failures = 0;
 
-for (const path of ["/", "/boutique-chevron-island"]) {
+for (const path of [
+  "/",
+  "/our-difference",
+  "/house-and-land",
+  "/buyers-agency",
+  "/property-management",
+  "/property-sales",
+  "/about",
+  "/reviews",
+  "/contact",
+  "/privacy-policy",
+  "/boutique-chevron-island",
+]) {
   const page = await browser.newPage();
   await page.setViewport({ width: 1440, height: 900 });
   await page.goto(BASE + path, { waitUntil: "networkidle0" });

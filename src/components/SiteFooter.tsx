@@ -1,8 +1,16 @@
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
-import { site } from "@/lib/site";
+import { serviceLinks, site } from "@/lib/site";
 
 const linkClass = "text-cream/80 transition-colors hover:text-amber-light";
+
+const aboutLinks = [
+  { label: "About us", href: "/about" },
+  { label: "Our Difference", href: "/our-difference" },
+  { label: "Reviews", href: "/reviews" },
+  { label: "Boutique Chevron Island", href: "/boutique-chevron-island" },
+  { label: "Get in touch", href: "/contact" },
+];
 
 const socials = [
   {
@@ -87,18 +95,11 @@ export function SiteFooter() {
             <span className="text-xs font-extrabold tracking-[0.16em] text-amber-light uppercase">
               About
             </span>
-            <Link href="/#about" className={linkClass}>
-              About us
-            </Link>
-            <Link href="/#difference" className={linkClass}>
-              Our Difference
-            </Link>
-            <Link href="/#reviews" className={linkClass}>
-              Reviews
-            </Link>
-            <Link href="/#about" className={linkClass}>
-              FAQs
-            </Link>
+            {aboutLinks.map((link) => (
+              <Link key={link.href} href={link.href} className={linkClass}>
+                {link.label}
+              </Link>
+            ))}
           </div>
 
           <div
@@ -108,18 +109,11 @@ export function SiteFooter() {
             <span className="text-xs font-extrabold tracking-[0.16em] text-amber-light uppercase">
               Solutions
             </span>
-            <Link href="/#services" className={linkClass}>
-              House and Land
-            </Link>
-            <Link href="/#services" className={linkClass}>
-              Buyers Agency
-            </Link>
-            <Link href="/#services" className={linkClass}>
-              Property Management
-            </Link>
-            <Link href="/#services" className={linkClass}>
-              Property Sales
-            </Link>
+            {serviceLinks.map((link) => (
+              <Link key={link.href} href={link.href} className={linkClass}>
+                {link.label}
+              </Link>
+            ))}
           </div>
 
           <div
@@ -150,14 +144,9 @@ export function SiteFooter() {
           className="flex flex-wrap justify-between gap-3 border-t border-cream/15 pt-[22px] text-[12.5px] text-cream/55"
         >
           <span>©{new Date().getFullYear()} by QLAND</span>
-          <span className="flex gap-5">
-            <Link href="/#contact" className="hover:text-cream">
-              Website terms of use
-            </Link>
-            <Link href="/#contact" className="hover:text-cream">
-              Privacy Policy
-            </Link>
-          </span>
+          <Link href="/privacy-policy" className="hover:text-cream">
+            Privacy Policy
+          </Link>
         </Reveal>
       </div>
     </footer>

@@ -5,6 +5,7 @@ import ChatWidget from "@/components/ChatWidget";
 import HeroVideo from "@/components/HeroVideo";
 import Reveal from "@/components/Reveal";
 import SiteHeader from "@/components/SiteHeader";
+import TopBar from "@/components/TopBar";
 import { SiteFooter } from "@/components/SiteFooter";
 import { features, reviews, services, site, welcomeImage } from "@/lib/site";
 
@@ -28,20 +29,8 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <div className="flex min-h-screen flex-col">
-      {/* Top bar — hidden on narrow screens, as in the design */}
-      <div className="gutter-x hidden flex-wrap justify-between gap-x-6 gap-y-2 bg-ink py-2 text-xs font-medium tracking-[0.04em] text-cream sm:flex">
-        <span>{site.address.inline}</span>
-        <span className="flex gap-5">
-          <a href={site.phoneHref} className="text-amber-light hover:text-cream">
-            {site.phone}
-          </a>
-          <a href={site.emailHref} className="text-amber-light hover:text-cream">
-            {site.email}
-          </a>
-        </span>
-      </div>
-
-      <SiteHeader active="home" />
+      <TopBar />
+      <SiteHeader />
 
       {/* Hero — above the fold, so it uses the CSS `rise-in` cascade rather than
           a scroll trigger and plays before hydration. */}
@@ -69,7 +58,7 @@ export default function HomePage() {
               Schedule a free call
             </a>
             <Link
-              href="#about"
+              href="/about"
               className="pill-cta border-[1.5px] border-cream/40 font-semibold text-cream hover:border-amber-light hover:text-amber-light"
             >
               About Us
@@ -122,7 +111,7 @@ export default function HomePage() {
             {services.map((s, i) => (
               <Reveal key={s.title} variant="scale" delay={i * 110}>
                 <Link
-                  href="#contact"
+                  href={s.href}
                   className="group card-lift relative flex min-h-[340px] flex-col justify-end overflow-hidden rounded-[18px] bg-ink-soft text-cream hover:-translate-y-1.5"
                 >
                   <Image
@@ -210,7 +199,7 @@ export default function HomePage() {
             </Reveal>
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 wide:grid-cols-3">
-            {reviews.map((r, i) => (
+            {reviews.slice(0, 3).map((r, i) => (
               <Reveal key={r.name} delay={i * 100}>
                 <div className="card-lift flex h-full flex-col gap-2.5 rounded-2xl border border-line bg-cream p-5 hover:-translate-y-1 hover:border-amber/60 hover:shadow-[0_12px_28px_rgba(22,19,14,0.07)]">
                   <span
@@ -233,6 +222,14 @@ export default function HomePage() {
               </Reveal>
             ))}
           </div>
+          <Reveal variant="fade" className="self-start">
+            <Link
+              href="/reviews"
+              className="border-b-2 border-amber pb-[3px] text-[14.5px] font-bold text-amber-ink transition-colors hover:border-ink hover:text-ink"
+            >
+              Read all {reviews.length} reviews →
+            </Link>
+          </Reveal>
         </div>
       </section>
 

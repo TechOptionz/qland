@@ -3,6 +3,7 @@ import ImageSlot from "@/components/ImageSlot";
 import RegisterInterestForm from "@/components/RegisterInterestForm";
 import Reveal from "@/components/Reveal";
 import SiteHeader from "@/components/SiteHeader";
+import TopBar from "@/components/TopBar";
 import { ProjectFooter } from "@/components/SiteFooter";
 import { boutiqueHighlights, locationPoints, site } from "@/lib/site";
 
@@ -38,7 +39,8 @@ const BOUTIQUE_IMAGES: Record<string, string | undefined> = {
 export default function BoutiqueChevronIslandPage() {
   return (
     <div className="flex min-h-screen flex-col">
-      <SiteHeader active="boutique" />
+      <TopBar />
+      <SiteHeader />
 
       {/* Hero — CSS cascade, not a scroll trigger: it is already on screen. */}
       <section className="relative overflow-hidden bg-ink text-cream">

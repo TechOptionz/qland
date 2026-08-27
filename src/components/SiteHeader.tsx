@@ -2,30 +2,31 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { mainLinks, serviceLinks } from "@/lib/site";
 import logo from "../../public/assets/qland-logo.png";
 
-type NavLink = { label: string; href: string };
+/** Entries shown before the Services dropdown, and after it. */
+const BEFORE = mainLinks.slice(0, 2); // Home, Our Difference
+const AFTER = mainLinks.slice(2); // About Us, Reviews, Boutique Chevron Island
 
-const SERVICE_LINKS: NavLink[] = [
-  { label: "House and Land", href: "/#services" },
-  { label: "Buyers Agency", href: "/#services" },
-  { label: "Property Management", href: "/#services" },
-];
-
-/**
- * `active` marks the page the header is rendered on, so the current entry
- * is highlighted the way it is in the design.
- */
-export default function SiteHeader({
-  active,
-}: {
-  active: "home" | "boutique";
-}) {
+export default function SiteHeader() {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const progressRef = useRef<HTMLDivElement>(null);
   const close = () => setMenuOpen(false);
+
+  // "/" only matches itself; every other entry also matches its sub-paths.
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  const servicesActive = serviceLinks.some((link) => isActive(link.href));
+
+  // Close the mobile menu when the route changes — otherwise it stays open
+  // over the page the reader just navigated to.
+  useEffect(() => setMenuOpen(false), [pathname]);
 
   // Condense the bar once the page has moved, and drive the progress rail along
   // its bottom edge. Both read the same scroll position, so they share one
@@ -60,15 +61,10 @@ export default function SiteHeader({
     };
   }, []);
 
-  const isHome = active === "home";
-  const contactHref = isHome ? "/#contact" : "#register";
-
-  const mainLinks: NavLink[] = [
-    { label: "Home", href: "/" },
-    { label: "Our Difference", href: "/#difference" },
-    { label: "About Us", href: "/#about" },
-    { label: "Reviews", href: "/#reviews" },
-  ];
+  const deskLink = (href: string) =>
+    isActive(href)
+      ? "text-amber-ink underline decoration-amber decoration-2 underline-offset-8"
+      : "hover:text-amber-dark";
 
   return (
     <header
@@ -109,19 +105,30 @@ export default function SiteHeader({
       </button>
 
       {/* Desktop navigation */}
-      <nav className="hidden items-center gap-[clamp(14px,2vw,28px)] text-[13.5px] font-semibold tracking-[0.02em] nav:flex">
-        <Link href="/" className={isHome ? "text-amber-dark" : "hover:text-amber-dark"}>
-          Home
-        </Link>
-        <Link href="/#difference" className="hover:text-amber-dark">
-          Our Difference
-        </Link>
+      <nav
+        aria-label="Main"
+        className="hidden items-center gap-[clamp(12px,1.6vw,24px)] text-[13.5px] font-semibold tracking-[0.02em] nav:flex"
+      >
+        {BEFORE.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            aria-current={isActive(link.href) ? "page" : undefined}
+            className={deskLink(link.href)}
+          >
+            {link.label}
+          </Link>
+        ))}
 
         {/* Hover/focus dropdown — CSS-only so it works before hydration. */}
         <div className="group relative">
           <button
             type="button"
-            className="flex cursor-pointer items-center gap-1.5 font-semibold group-hover:text-amber-dark"
+            className={`flex cursor-pointer items-center gap-1.5 font-semibold group-hover:text-amber-dark ${
+              servicesActive
+                ? "text-amber-ink underline decoration-amber decoration-2 underline-offset-8"
+                : ""
+            }`}
             aria-haspopup="true"
           >
             Services
@@ -131,11 +138,14 @@ export default function SiteHeader({
           </button>
           <div className="invisible absolute top-full -left-4 z-60 pt-3 opacity-0 transition-opacity group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
             <div className="flex min-w-[220px] flex-col gap-0.5 rounded-xl border border-line bg-white p-2 shadow-[0_16px_40px_rgba(22,19,14,0.12)]">
-              {SERVICE_LINKS.map((link) => (
+              {serviceLinks.map((link) => (
                 <Link
-                  key={link.label}
+                  key={link.href}
                   href={link.href}
-                  className="rounded-lg px-3.5 py-2.5 whitespace-nowrap hover:bg-tint"
+                  aria-current={isActive(link.href) ? "page" : undefined}
+                  className={`rounded-lg px-3.5 py-2.5 whitespace-nowrap hover:bg-tint ${
+                    isActive(link.href) ? "bg-tint text-amber-ink" : ""
+                  }`}
                 >
                   {link.label}
                 </Link>
@@ -144,20 +154,19 @@ export default function SiteHeader({
           </div>
         </div>
 
-        <Link href="/#about" className="hover:text-amber-dark">
-          About Us
-        </Link>
-        <Link href="/#reviews" className="hover:text-amber-dark">
-          Reviews
-        </Link>
+        {AFTER.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            aria-current={isActive(link.href) ? "page" : undefined}
+            className={deskLink(link.href)}
+          >
+            {link.label}
+          </Link>
+        ))}
+
         <Link
-          href="/boutique-chevron-island"
-          className={active === "boutique" ? "text-amber-dark" : "hover:text-amber-dark"}
-        >
-          Boutique Chevron Island
-        </Link>
-        <Link
-          href={contactHref}
+          href="/contact"
           className="rounded-full bg-amber px-[22px] py-[11px] font-bold text-ink transition-colors hover:bg-ink hover:text-cream"
         >
           Contact Us
@@ -168,16 +177,16 @@ export default function SiteHeader({
       {menuOpen && (
         <nav
           id="mobile-nav"
+          aria-label="Main"
           className="rise-in mt-3 flex basis-full flex-col gap-1 border-t border-line pt-2.5 pb-3.5 text-[15px] font-semibold [animation-duration:320ms] nav:hidden"
         >
-          {mainLinks.slice(0, 2).map((link) => (
+          {BEFORE.map((link) => (
             <Link
-              key={link.label}
+              key={link.href}
               href={link.href}
               onClick={close}
-              className={`rounded-[10px] px-2 py-3 ${
-                link.label === "Home" && isHome ? "text-amber-dark" : ""
-              }`}
+              aria-current={isActive(link.href) ? "page" : undefined}
+              className={`rounded-[10px] px-2 py-3 ${isActive(link.href) ? "text-amber-ink" : ""}`}
             >
               {link.label}
             </Link>
@@ -186,38 +195,34 @@ export default function SiteHeader({
           <span className="px-2 pt-3 pb-1 text-[11px] font-extrabold tracking-[0.16em] text-muted-soft uppercase">
             Services
           </span>
-          {SERVICE_LINKS.map((link) => (
+          {serviceLinks.map((link) => (
             <Link
-              key={link.label}
+              key={link.href}
               href={link.href}
               onClick={close}
-              className="rounded-[10px] py-3 pr-2 pl-5"
+              aria-current={isActive(link.href) ? "page" : undefined}
+              className={`rounded-[10px] py-3 pr-2 pl-5 ${
+                isActive(link.href) ? "text-amber-ink" : ""
+              }`}
             >
               {link.label}
             </Link>
           ))}
 
-          {mainLinks.slice(2).map((link) => (
+          {AFTER.map((link) => (
             <Link
-              key={link.label}
+              key={link.href}
               href={link.href}
               onClick={close}
-              className="rounded-[10px] px-2 py-3"
+              aria-current={isActive(link.href) ? "page" : undefined}
+              className={`rounded-[10px] px-2 py-3 ${isActive(link.href) ? "text-amber-ink" : ""}`}
             >
               {link.label}
             </Link>
           ))}
+
           <Link
-            href="/boutique-chevron-island"
-            onClick={close}
-            className={`rounded-[10px] px-2 py-3 ${
-              active === "boutique" ? "text-amber-dark" : ""
-            }`}
-          >
-            Boutique Chevron Island
-          </Link>
-          <Link
-            href={contactHref}
+            href="/contact"
             onClick={close}
             className="mt-2.5 rounded-full bg-amber px-[22px] py-3.5 text-center font-bold text-ink"
           >

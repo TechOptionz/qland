@@ -4,7 +4,10 @@ import { parseEnquiry } from "@/lib/enquiry";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-/** Endpoint behind the Boutique Chevron Island register-interest form. */
+/**
+ * Endpoint behind the contact, property management, property sales, and
+ * house & land forms. `source` records which page the enquiry came from.
+ */
 export async function POST(request: Request) {
   let body: unknown;
   try {
@@ -21,7 +24,7 @@ export async function POST(request: Request) {
   // NOTE: enquiries are only written to the server log. Wire this up to the
   // real destination (CRM, transactional email, or a database) before launch —
   // see README.md § "Enquiry forms".
-  console.log("[register] Boutique Chevron Island enquiry:", result.enquiry);
+  console.log("[enquiry]", result.enquiry);
 
   return NextResponse.json({ ok: true });
 }

@@ -3,7 +3,7 @@
  *
  * The failure mode that matters is content that animates *out* and never comes
  * back: `.reveal` ships hidden in the HTML, so any element the observer misses
- * is invisible to the reader forever. This walks both pages top to bottom and
+ * is invisible to the reader forever. This walks every page top to bottom and
  * asserts nothing is left behind — plus the reduced-motion and no-JS escape
  * hatches, which are the two ways the observer never runs at all.
  *
@@ -13,7 +13,19 @@ import fs from "node:fs";
 import puppeteer from "puppeteer-core";
 
 const BASE = process.env.BASE ?? "http://localhost:3000";
-const PATHS = ["/", "/boutique-chevron-island"];
+const PATHS = [
+  "/",
+  "/our-difference",
+  "/house-and-land",
+  "/buyers-agency",
+  "/property-management",
+  "/property-sales",
+  "/about",
+  "/reviews",
+  "/contact",
+  "/privacy-policy",
+  "/boutique-chevron-island",
+];
 
 /** Set CHROME_PATH to override. */
 const CHROME =
@@ -73,10 +85,11 @@ for (const path of PATHS) {
   console.log(`  ${total} reveals, ${revealedAtTop} visible before scrolling`);
   console.log(`  header padding ${padTop} -> ${padScrolled}`);
 
+  const before = failures;
   if (stuck.length) fail(`still hidden after scrolling: ${stuck.join(", ")}`);
   if (total > 0 && revealedAtTop === total) fail("nothing was deferred — reveals are inert");
   if (padTop === padScrolled) fail("header did not condense on scroll");
-  if (!failures) console.log("  ok");
+  if (failures === before) console.log("  ok");
 
   await page.close();
 }

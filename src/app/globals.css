@@ -12,6 +12,11 @@
   --color-amber: #f0a63c;
   --color-amber-light: #f6b352;
   --color-amber-dark: #e89a2b;
+  /* Link-grade amber. `amber-dark` is an accent for decorative labels and
+     only reaches ~2.1:1 on cream, which is fine for a rule or a numeral but
+     not for text a reader has to click. This clears 4.5:1 on cream, white, and
+     the tint used by the nav dropdown — see `npm run check:contrast`. */
+  --color-amber-ink: #946010;
   --color-body: #5c5344;
   --color-body-strong: #3d362b;
   --color-muted: #8a7d63;
@@ -41,6 +46,13 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+
+    /* `reveal-left` / `reveal-right` park their content 36px outside the layout
+       box until they animate in. On narrow screens that overhang is wider than
+       the 20px gutter, so it would add a horizontal scrollbar. `clip` — not
+       `hidden` — trims it without creating a scroll container, which is what
+       keeps the sticky header sticking to the viewport. */
+    overflow-x: clip;
   }
 
   a {
