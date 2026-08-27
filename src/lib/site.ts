@@ -220,31 +220,6 @@ export const reviews = [
   },
 ] as const;
 
-export const boutiqueHighlights = [
-  {
-    label: "The Project",
-    title: "Boutique by design",
-    body: "A limited collection of residences with the quality finishes Qland builds as standard — high ceilings, ducted air, and premium tiling throughout.",
-  },
-  {
-    label: "The Lifestyle",
-    title: "Island living, city close",
-    body: "Walk to Surfers Paradise beach, HOTA galleries, and the Thomas Drive dining strip from a quiet riverside street.",
-  },
-  {
-    label: "The Opportunity",
-    title: "Owner-occupiers & investors",
-    body: "Suited to buyers seeking a premium Gold Coast address with strong long-term growth and rental demand.",
-  },
-] as const;
-
-export const locationPoints = [
-  "5 minutes to Surfers Paradise beach",
-  "Walk to HOTA — Home of the Arts",
-  "Cafes and dining on Thomas Drive",
-  "Close to Gold Coast light rail",
-] as const;
-
 /** System prompt for the site assistant. Kept here so the copy lives with the rest of the content. */
 export const assistantSystemPrompt = `You are the friendly website assistant for Qland Property, a Brisbane buyers agency and builder (House and Land packages, Buyers Agency, Property Management, Property Sales).
 

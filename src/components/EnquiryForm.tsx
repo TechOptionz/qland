@@ -11,8 +11,12 @@ export type FormField = {
     | "email"
     | "phone"
     | "address"
+    | "postcode"
     | "subject"
     | "contactMethod"
+    | "bedrooms"
+    | "budget"
+    | "buyerType"
     | "message";
   label: string;
   type?: "text" | "email" | "tel" | "textarea" | "select";

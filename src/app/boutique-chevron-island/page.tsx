@@ -1,39 +1,28 @@
 import type { Metadata } from "next";
-import ImageSlot from "@/components/ImageSlot";
-import RegisterInterestForm from "@/components/RegisterInterestForm";
+import Image from "next/image";
+import ChatWidget from "@/components/ChatWidget";
+import EnquiryForm from "@/components/EnquiryForm";
+import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import SiteHeader from "@/components/SiteHeader";
 import TopBar from "@/components/TopBar";
 import { ProjectFooter } from "@/components/SiteFooter";
-import { boutiqueHighlights, locationPoints, site } from "@/lib/site";
+import { boutique } from "@/lib/pages";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   // Renders as "Boutique Chevron Island · QLand Property" via the root template.
   title: "Boutique Chevron Island",
   description:
-    "A boutique residential project on Chevron Island, moments from Surfers Paradise. Register your interest for plans, pricing, and availability.",
+    "BOUTIQUE — a luxury collection of 42 resident-only apartments on Chevron Island, Gold Coast. Two and three-bedroom residences from $1,220,000.",
   alternates: { canonical: "/boutique-chevron-island" },
   openGraph: {
     url: "/boutique-chevron-island",
     title: "Boutique Chevron Island — Gold Coast",
     description:
-      "A limited collection of residences on Chevron Island, walking distance to Surfers Paradise, HOTA, and the Thomas Drive dining strip.",
+      "42 resident-only residences by Draycon and BDA Architects, moments from HOTA and Surfers Paradise. Register for pricing, floor plans, and private inspections.",
+    images: [{ url: boutique.images.aerialTower }],
   },
-};
-
-/**
- * Fill these in as the project renders become available — drop the file into
- * `public/assets/` and set the matching path (e.g. `/assets/bci-hero.jpg`).
- * Empty values render a labelled placeholder instead.
- */
-const BOUTIQUE_IMAGES: Record<string, string | undefined> = {
-  hero: undefined,
-  exterior: undefined,
-  interior: undefined,
-  kitchen: undefined,
-  living: undefined,
-  island: undefined,
-  map: undefined,
 };
 
 export default function BoutiqueChevronIslandPage() {
@@ -42,166 +31,290 @@ export default function BoutiqueChevronIslandPage() {
       <TopBar />
       <SiteHeader />
 
-      {/* Hero — CSS cascade, not a scroll trigger: it is already on screen. */}
-      <section className="relative overflow-hidden bg-ink text-cream">
-        <div className="absolute inset-0">
-          {/* No placeholder here — an empty hero reads better as the plain dark
-              gradient than as a labelled slot showing through it. */}
-          {BOUTIQUE_IMAGES.hero && (
-            <ImageSlot
-              src={BOUTIQUE_IMAGES.hero}
-              label="Hero render / photo"
-              alt="Boutique Chevron Island"
-              priority
-            />
-          )}
-          <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(100deg,rgba(22,19,14,0.9)_25%,rgba(22,19,14,0.3)_80%)]" />
-        </div>
-        <div className="gutter-x shell relative flex flex-col items-start gap-[22px] py-[clamp(60px,9vw,120px)]">
-          <span className="rise-in inline-flex items-center gap-2.5 rounded-full border border-amber-light/50 px-[18px] py-2 text-xs font-bold tracking-[0.18em] text-amber-light uppercase">
-            Featured Project · Gold Coast
-          </span>
-          <h1 className="rise-in m-0 text-[clamp(30px,4.2vw,52px)] leading-[1.1] font-extrabold tracking-[-0.02em] text-pretty [animation-delay:120ms]">
-            Boutique Chevron Island
-          </h1>
-          <p className="rise-in m-0 max-w-[46ch] text-[clamp(15px,1.3vw,18px)] leading-relaxed font-medium text-cream/85 [animation-delay:240ms]">
-            A boutique residential project on Chevron Island, moments from Surfers Paradise.
-            Register your interest for plans, pricing, and availability.
-          </p>
-          <div className="rise-in mt-1 flex flex-wrap gap-3.5 [animation-delay:360ms]">
-            <a href="#register" className="pill-cta bg-amber text-ink hover:bg-cream">
-              Register your interest
-            </a>
-            <a
-              href={site.phoneHref}
-              className="pill-cta border-[1.5px] border-cream/40 font-semibold text-cream hover:border-amber-light hover:text-amber-light"
-            >
-              Call {site.phone}
-            </a>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={boutique.eyebrow}
+        title={boutique.title}
+        lede={boutique.lede}
+        image={boutique.images.aerialTower}
+        imageAlt="Aerial render of the BOUTIQUE tower on Chevron Island with the Surfers Paradise skyline behind"
+        ctas={[
+          { label: "Register your interest", href: "#register" },
+          {
+            label: `Call ${site.phone}`,
+            href: site.phoneHref,
+            external: true,
+            variant: "ghost",
+          },
+        ]}
+      />
 
-      {/* Highlights */}
-      <section className="gutter-x shell band-y-sm">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          {boutiqueHighlights.map((h, i) => (
-            <Reveal key={h.label} delay={i * 100}>
-              <div className="card-lift flex h-full flex-col gap-2.5 rounded-2xl border border-line bg-white p-6 hover:-translate-y-1 hover:border-amber hover:shadow-[0_14px_34px_rgba(240,166,60,0.14)]">
-                <span className="text-[11px] font-extrabold tracking-[0.18em] text-amber-dark uppercase">
-                  {h.label}
-                </span>
-                <span className="text-[17px] font-bold">{h.title}</span>
-                <p className="m-0 text-[13.5px] leading-[1.65] text-body">{h.body}</p>
-              </div>
+      {/* Key facts */}
+      <section className="gutter-x border-b border-line bg-white py-[clamp(28px,4vw,44px)]">
+        <div className="shell grid grid-cols-2 gap-x-6 gap-y-8 wide:grid-cols-4">
+          {boutique.facts.map((fact, i) => (
+            <Reveal key={fact.label} delay={i * 80} className="flex flex-col gap-1.5">
+              <span className="text-[11px] font-extrabold tracking-[0.18em] text-amber-dark uppercase">
+                {fact.label}
+              </span>
+              <span className="text-[clamp(16px,1.9vw,21px)] font-extrabold tracking-[-0.01em]">
+                {fact.value}
+              </span>
             </Reveal>
           ))}
         </div>
       </section>
 
-      {/* Gallery */}
-      <section className="gutter-x shell flex flex-col gap-6 pb-[clamp(44px,6vw,80px)]">
-        <Reveal className="flex flex-col gap-2.5">
-          <span className="eyebrow text-amber-dark">Gallery</span>
-          <h2 className="section-title">The project</h2>
-        </Reveal>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <Reveal
-            variant="scale"
-            className="h-[clamp(260px,40vw,420px)] min-w-0 overflow-hidden rounded-2xl sm:col-span-2"
+      {/* Alternating design bands. The renders are portrait, so each band is a
+          two-column split rather than a full-bleed image. */}
+      {boutique.bands.map((band, i) => {
+        const dark = i % 2 === 1;
+        return (
+          <section
+            key={band.eyebrow}
+            className={`gutter-x band-y-sm ${dark ? "bg-ink text-cream" : ""}`}
           >
-            <ImageSlot src={BOUTIQUE_IMAGES.exterior} label="Render — exterior" />
-          </Reveal>
-          <Reveal
-            variant="scale"
-            delay={110}
-            className="h-[clamp(200px,30vw,420px)] min-w-0 overflow-hidden rounded-2xl"
-          >
-            <ImageSlot src={BOUTIQUE_IMAGES.interior} label="Render — interior" />
-          </Reveal>
-          <Reveal
-            variant="scale"
-            className="h-[clamp(200px,30vw,260px)] min-w-0 overflow-hidden rounded-2xl"
-          >
-            <ImageSlot src={BOUTIQUE_IMAGES.kitchen} label="Render — kitchen" />
-          </Reveal>
-          <Reveal
-            variant="scale"
-            delay={110}
-            className="h-[clamp(200px,30vw,260px)] min-w-0 overflow-hidden rounded-2xl"
-          >
-            <ImageSlot src={BOUTIQUE_IMAGES.living} label="Render — living" />
-          </Reveal>
-          <Reveal
-            variant="scale"
-            delay={220}
-            className="h-[clamp(200px,30vw,260px)] min-w-0 overflow-hidden rounded-2xl"
-          >
-            <ImageSlot src={BOUTIQUE_IMAGES.island} label="Photo — Chevron Island" />
-          </Reveal>
-        </div>
-      </section>
+            <div className="shell grid grid-cols-1 items-center gap-[clamp(28px,5vw,64px)] mdx:grid-cols-2">
+              <Reveal
+                variant={dark ? "left" : "right"}
+                className={`relative aspect-[9/10] min-w-0 overflow-hidden rounded-2xl ${
+                  dark ? "" : "mdx:order-2"
+                }`}
+              >
+                <Image
+                  src={band.image}
+                  alt={band.alt}
+                  fill
+                  sizes="(max-width: 860px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </Reveal>
 
-      {/* Location */}
-      <section className="gutter-x band-y-sm bg-ink text-cream">
-        <div className="shell grid grid-cols-1 items-center gap-[clamp(28px,5vw,64px)] mdx:grid-cols-[1.1fr_minmax(0,1fr)]">
-          <Reveal variant="left" className="flex flex-col items-start gap-[18px]">
-            <span className="eyebrow text-amber-light">Location</span>
-            <h2 className="section-title">Chevron Island, Gold Coast</h2>
-            <p className="m-0 text-[14.5px] leading-[1.75] text-cream/80">
-              Set between Surfers Paradise and the HOTA precinct, Chevron Island offers
-              riverside living with cafes, dining, and the beach within walking distance.
+              <Reveal
+                variant={dark ? "right" : "left"}
+                delay={120}
+                className={`flex flex-col items-start gap-5 ${dark ? "" : "mdx:order-1"}`}
+              >
+                <span className={`eyebrow ${dark ? "text-amber-light" : "text-amber-dark"}`}>
+                  {band.eyebrow}
+                </span>
+                <h2 className="section-title max-w-[18ch]">{band.title}</h2>
+                {band.paragraphs.map((paragraph) => (
+                  <p
+                    key={paragraph}
+                    className={`m-0 max-w-[52ch] text-[14.5px] leading-[1.75] ${
+                      dark ? "text-cream/80" : "text-body"
+                    }`}
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </Reveal>
+            </div>
+          </section>
+        );
+      })}
+
+      {/* Work, play & wellness */}
+      <section className="gutter-x band-y">
+        <div className="shell flex flex-col gap-9">
+          <Reveal className="flex flex-col items-start gap-4">
+            <span className="eyebrow text-amber-dark">{boutique.wellness.eyebrow}</span>
+            <h2 className="section-title max-w-[20ch]">{boutique.wellness.title}</h2>
+            <p className="m-0 max-w-[62ch] text-[14.5px] leading-[1.75] text-body">
+              {boutique.wellness.body}
             </p>
-            <ul className="m-0 flex list-none flex-col gap-2.5 p-0 text-[13.5px] font-semibold">
-              {locationPoints.map((point, i) => (
+            <ul className="m-0 flex flex-wrap gap-2.5 p-0">
+              {boutique.wellness.amenities.map((amenity, i) => (
                 <li
-                  key={point}
-                  style={{ transitionDelay: `${260 + i * 110}ms` }}
-                  className="stagger-item flex items-center gap-2.5"
+                  key={amenity}
+                  style={{ transitionDelay: `${240 + i * 70}ms` }}
+                  className="stagger-item list-none rounded-full border border-amber/50 bg-tint px-[18px] py-2.5 text-[13px] font-bold text-amber-ink"
                 >
-                  <span
-                    aria-hidden
-                    className="h-[7px] w-[7px] shrink-0 rounded-full bg-amber"
-                  />
-                  {point}
+                  {amenity}
                 </li>
               ))}
             </ul>
           </Reveal>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <Reveal
+              variant="scale"
+              className="relative aspect-[9/10] min-w-0 overflow-hidden rounded-2xl"
+            >
+              <Image
+                src={boutique.images.pool}
+                alt="Pool deck on the communal leisure level"
+                fill
+                sizes="(max-width: 640px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </Reveal>
+            <Reveal
+              variant="scale"
+              delay={110}
+              className="relative aspect-[9/10] min-w-0 overflow-hidden rounded-2xl"
+            >
+              <Image
+                src={boutique.images.terrace}
+                alt="Residents on the communal terrace overlooking the city"
+                fill
+                sizes="(max-width: 640px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Location */}
+      <section className="gutter-x band-y bg-ink text-cream">
+        <div className="shell grid grid-cols-1 items-center gap-[clamp(28px,5vw,64px)] mdx:grid-cols-[1fr_minmax(0,1fr)]">
+          <Reveal variant="left" className="flex flex-col items-start gap-5">
+            <span className="eyebrow text-amber-light">{boutique.location.eyebrow}</span>
+            <h2 className="section-title max-w-[18ch]">{boutique.location.title}</h2>
+            <p className="m-0 max-w-[52ch] text-[14.5px] leading-[1.75] text-cream/80">
+              {boutique.location.body}
+            </p>
+            <dl className="m-0 mt-2 grid w-full grid-cols-3 gap-4 p-0">
+              {boutique.location.distances.map((distance, i) => (
+                <div
+                  key={distance.label}
+                  style={{ transitionDelay: `${260 + i * 110}ms` }}
+                  className="stagger-item flex flex-col gap-1 border-t border-cream/20 pt-3"
+                >
+                  <dt className="order-2 text-[11px] font-extrabold tracking-[0.16em] text-cream/60 uppercase">
+                    {distance.label}
+                  </dt>
+                  <dd className="order-1 m-0 text-[clamp(20px,2.6vw,28px)] font-extrabold tracking-[-0.02em] text-amber-light">
+                    {distance.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
+
           <Reveal
             variant="right"
             delay={120}
-            className="h-[clamp(240px,34vw,380px)] min-w-0 overflow-hidden rounded-2xl"
+            className="relative aspect-[5/4] min-w-0 overflow-hidden rounded-2xl"
           >
-            <ImageSlot
-              src={BOUTIQUE_IMAGES.map}
-              label="Location map / aerial photo"
-              tone="dark"
+            <Image
+              src={boutique.images.aerialIsland}
+              alt="Aerial view of Chevron Island, the Nerang River, and the Surfers Paradise skyline"
+              fill
+              sizes="(max-width: 860px) 100vw, 50vw"
+              className="object-cover"
             />
           </Reveal>
         </div>
       </section>
 
       {/* Register interest */}
-      <section id="register" className="gutter-x band-y-sm">
-        <Reveal
-          variant="scale"
-          className="mx-auto flex w-full max-w-[860px] flex-col gap-[22px] rounded-[22px] bg-[linear-gradient(110deg,#F0A63C,#F6B352)] p-[clamp(28px,5vw,52px)]"
-        >
-          <div className="flex flex-col gap-2">
-            <h2 className="m-0 text-[clamp(22px,2.6vw,30px)] font-extrabold tracking-[-0.02em]">
-              Register your interest
-            </h2>
-            <p className="m-0 text-sm leading-relaxed font-medium text-ink/75">
-              Be first to receive plans, pricing, and release updates for Boutique Chevron
-              Island.
+      <section id="register" className="gutter-x band-y">
+        <div className="shell grid grid-cols-1 items-start gap-[clamp(28px,5vw,56px)] mdx:grid-cols-[minmax(0,300px)_minmax(0,1fr)]">
+          <Reveal variant="left" className="flex flex-col gap-6">
+            <div className="flex flex-col gap-3">
+              <span className="eyebrow text-amber-dark">Marketed by</span>
+              <p className="m-0 text-[14.5px] leading-[1.75] text-body">
+                {boutique.enquiry.marketedBy}
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <span className="eyebrow text-amber-dark">{boutique.displaySuite.label}</span>
+              <address className="m-0 text-[14.5px] leading-[1.8] font-semibold text-body-strong not-italic">
+                {boutique.displaySuite.lines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
+              </address>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <span className="eyebrow text-amber-dark">The creators</span>
+              <dl className="m-0 flex flex-col gap-2.5 p-0">
+                {boutique.creators.map((creator) => (
+                  <div key={creator.role} className="flex flex-col">
+                    <dt className="text-[11px] font-extrabold tracking-[0.16em] text-muted uppercase">
+                      {creator.role}
+                    </dt>
+                    <dd className="m-0 text-[14.5px] font-bold">{creator.name}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </Reveal>
+
+          <Reveal
+            variant="right"
+            delay={120}
+            className="rounded-[22px] bg-[linear-gradient(110deg,#F0A63C,#F6B352)] p-[clamp(28px,4vw,48px)]"
+          >
+            <div className="mb-6 flex flex-col gap-2">
+              <span className="eyebrow text-ink/65">{boutique.enquiry.eyebrow}</span>
+              <h2 className="m-0 text-[clamp(22px,2.6vw,30px)] font-extrabold tracking-[-0.02em]">
+                {boutique.enquiry.title}
+              </h2>
+              <p className="m-0 text-sm leading-relaxed font-medium text-ink/75">
+                {boutique.enquiry.body}
+              </p>
+            </div>
+
+            <EnquiryForm
+              source="boutique-chevron-island"
+              submitLabel="Enquire now"
+              successMessage="Thank you — our sales team will be in touch with pricing, floor plans, and inspection times."
+              fields={[
+                { name: "name", label: "Full name", autoComplete: "name" },
+                { name: "email", label: "Email", type: "email", autoComplete: "email" },
+                { name: "phone", label: "Phone", type: "tel", autoComplete: "tel" },
+                {
+                  name: "postcode",
+                  label: "Suburb / postcode",
+                  autoComplete: "postal-code",
+                },
+                {
+                  name: "bedrooms",
+                  label: "Bedrooms",
+                  type: "select",
+                  options: ["2 Bedroom", "3 Bedroom", "Either"],
+                },
+                {
+                  name: "budget",
+                  label: "Budget",
+                  type: "select",
+                  options: ["$1.2M – $1.5M", "$1.5M – $2M", "$2M – $2.5M", "$2.5M – $3.5M+"],
+                },
+                {
+                  name: "buyerType",
+                  label: "I am a…",
+                  type: "select",
+                  options: ["Owner-occupier", "Investor", "Interstate / overseas buyer"],
+                  wide: true,
+                },
+                { name: "message", label: "Message", type: "textarea", wide: true },
+              ]}
+            />
+
+            <p className="mt-5 mb-0 text-[12.5px] leading-relaxed font-medium text-ink/65">
+              {boutique.enquiry.consent}
             </p>
-          </div>
-          <RegisterInterestForm />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Disclaimer */}
+      <section className="gutter-x pb-[clamp(36px,5vw,64px)]">
+        <Reveal variant="fade" className="shell">
+          <p className="m-0 max-w-[92ch] border-t border-line pt-6 text-[12px] leading-[1.7] text-muted">
+            {boutique.disclaimer}
+          </p>
         </Reveal>
       </section>
 
       <ProjectFooter />
+      <ChatWidget />
     </div>
   );
 }

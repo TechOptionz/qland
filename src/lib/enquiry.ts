@@ -18,8 +18,12 @@ const LIMITS = {
   email: 200,
   phone: 50,
   address: 300,
+  postcode: 120,
   subject: 200,
   contactMethod: 60,
+  bedrooms: 40,
+  budget: 40,
+  buyerType: 60,
   message: 4000,
 } as const;
 

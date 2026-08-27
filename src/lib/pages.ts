@@ -277,6 +277,125 @@ export const reviewsPage = {
 } as const;
 
 /* ---------------------------------------------------------------------------
+   /boutique-chevron-island
+
+   The live page embeds the project's own marketing site in an iframe
+   (astonishing-blini-0f41a7.netlify.app). Copy below is transcribed from it;
+   the renders were extracted from the same bundle into
+   `public/assets/boutique/`. The "watch the film" call to action is not
+   reproduced — the source marks it as a placeholder with no film attached.
+   --------------------------------------------------------------------------- */
+
+const RENDER = "/assets/boutique";
+
+export const boutique = {
+  eyebrow: "Chevron Island · Gold Coast",
+  title: "Crafted for comfort, positioned for pleasure.",
+  lede: "A luxury collection of just 42 resident-only apartments on the Gold Coast’s most desired lifestyle destination. Two & three-bedroom residences from $1,220,000.",
+
+  images: {
+    aerialTower: `${RENDER}/aerial-tower.jpg`,
+    aerialIsland: `${RENDER}/aerial-island.jpg`,
+    living: `${RENDER}/living.jpg`,
+    livingBalcony: `${RENDER}/living-balcony.jpg`,
+    kitchen: `${RENDER}/kitchen.jpg`,
+    bathroom: `${RENDER}/bathroom.jpg`,
+    pool: `${RENDER}/pool.jpg`,
+    terrace: `${RENDER}/terrace.jpg`,
+  },
+
+  facts: [
+    { label: "Residences", value: "2 & 3 Bedroom · 2 Bath" },
+    { label: "Priced from", value: "$1,220,000" },
+    { label: "The collection", value: "42 resident-only homes" },
+    { label: "Address", value: "Chevron Island, GC" },
+  ],
+
+  /** Alternating image/text bands, in the order the project site runs them. */
+  bands: [
+    {
+      eyebrow: "One of a kind, by design",
+      title: "Inspiring design enhances simple pleasures.",
+      paragraphs: [
+        "Designed by award-winning BDA Architects, BOUTIQUE is characterised by striking architecture and open-plan spaces that maximise waterfront and skyline views — an aesthetic that encourages residents to embrace work, play and wellness.",
+      ],
+      image: `${RENDER}/living.jpg`,
+      alt: "Open-plan living room with floor-to-ceiling glazing",
+    },
+    {
+      eyebrow: "Versatile design",
+      title: "A kitchen crafted like fine furniture.",
+      paragraphs: [
+        "Detailed joinery greets you on arrival. Pale stone benchtops and splashbacks encase world-class European SMEG appliances, while thoughtful storage and clever accent lighting keep your space clean and minimal.",
+        "The residences are sleek, minimal and speak a contemporary language — a high level of detail creating a vision that is inviting, clear and confident.",
+      ],
+      image: `${RENDER}/kitchen.jpg`,
+      alt: "Kitchen with stone island bench, pendant lighting and integrated appliances",
+    },
+    {
+      eyebrow: "Elegant style",
+      title: "Each room, a sanctuary of calm.",
+      paragraphs: [
+        "There is a clear focus on every detail, no matter how small — making each space feel considered and special, promoting health and wellbeing.",
+        "Refined and precisely crafted, your bathroom is a work of art — pairing subtle timbers with stone benchtops, porcelain tiles and gunmetal fixtures.",
+      ],
+      image: `${RENDER}/bathroom.jpg`,
+      alt: "Bathroom with stone benchtop, timber joinery and gunmetal fixtures",
+    },
+  ],
+
+  wellness: {
+    eyebrow: "Work, play & wellness",
+    title: "A life you won’t need to vacation from.",
+    body: "BOUTIQUE heralds a new era of apartment living — a communal leisure level with modern co-working space, an east-facing yoga deck, pool, spa, gymnasium and a shared rooftop zen herb garden. Balanced areas for work, play and wellness, all at the press of the elevator button.",
+    amenities: [
+      "Communal leisure level",
+      "Modern co-working space",
+      "East-facing yoga deck",
+      "Pool",
+      "Spa",
+      "Gymnasium",
+      "Rooftop zen herb garden",
+    ],
+  },
+
+  location: {
+    eyebrow: "The location",
+    title: "A stone’s throw from everything.",
+    body: "Moments from the city’s cultural heart, HOTA, and the Gold Coast’s holiday playground, Surfers Paradise. Swim, surf, dine and relax on one of Australia’s most pristine beaches — then come home to calm.",
+    distances: [
+      { value: "400m", label: "Local cafés" },
+      { value: "650m", label: "HOTA access" },
+      { value: "1.4km", label: "The beach" },
+    ],
+  },
+
+  enquiry: {
+    eyebrow: "Register your interest",
+    title: "Enquire about BOUTIQUE.",
+    body: "Leave your details and our sales team will be in touch with pricing, floor plans and private inspection times.",
+    marketedBy:
+      "Speak with the QLand Property team for pricing, floor plans and private inspections.",
+    consent:
+      "By submitting you agree to be contacted by the BOUTIQUE sales team regarding this development.",
+  },
+
+  displaySuite: {
+    label: "Display suite",
+    lines: ["Shop 3, 46–50 Thomas Drive", "Chevron Island, QLD 4217"],
+  },
+
+  creators: [
+    { role: "Developer", name: "Draycon" },
+    { role: "Architecture", name: "BDA Architects" },
+    { role: "Marketed by", name: "QLand Property" },
+  ],
+
+  disclaimer:
+    "While all reasonable care has been taken in the preparation of this material, it is intended as a visual aid and does not necessarily depict the finished state of the property. Illustrations and photographs are for presentation purposes and are indicative only. This does not form part of, and is not, an offer or a contract of sale. Dimensions and specifications are subject to change without notice.",
+} as const;
+
+/* ---------------------------------------------------------------------------
    /privacy-policy
    --------------------------------------------------------------------------- */
 

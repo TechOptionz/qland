@@ -237,11 +237,14 @@ export default function HomePage() {
       <section id="boutique" className="gutter-x pb-[clamp(56px,8vw,110px)]">
         <Reveal variant="scale" className="shell mt-[clamp(56px,8vw,110px)]">
           <div className="flex flex-wrap items-center justify-between gap-6 rounded-[22px] bg-[linear-gradient(110deg,#F0A63C,#F6B352)] p-[clamp(32px,5vw,56px)]">
-            <div className="flex flex-col gap-2">
+            <div className="flex max-w-[46ch] flex-col gap-2">
               <span className="eyebrow text-ink/65">Featured Project</span>
               <span className="text-[clamp(20px,2.4vw,28px)] font-extrabold tracking-[-0.02em]">
                 Boutique Chevron Island
               </span>
+              <p className="m-0 text-sm leading-relaxed font-medium text-ink/75">
+                42 resident-only residences on the Gold Coast, from $1,220,000.
+              </p>
             </div>
             <Link
               href="/boutique-chevron-island"

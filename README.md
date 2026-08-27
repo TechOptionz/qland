@@ -17,7 +17,7 @@ project (`Qland Home.dc.html` and `Boutique Chevron Island.dc.html`).
 | `/reviews` | All Google reviews |
 | `/contact` | Office and direct contacts, contact form |
 | `/privacy-policy` | Full policy text |
-| `/boutique-chevron-island` | Project page: hero, highlights, gallery, location, register-interest form |
+| `/boutique-chevron-island` | BOUTIQUE project page: hero, key facts, three design bands, amenity, location, enquiry form, creators, disclaimer |
 | `not-found` | Themed 404 with links back into the site |
 
 Every page sets its own `title`, `description`, canonical URL, and Open Graph
@@ -65,12 +65,11 @@ Anthropic Messages API call (`claude-opus-5`, low effort — replies are short) 
 the key is never exposed to the browser. Any API failure returns an empty reply
 and the widget shows the contact fallback rather than an error.
 
-**Enquiry forms.** Every form on the site posts to one of two endpoints —
-`/api/register` (Boutique Chevron Island) and `/api/enquiry` (contact, property
-management, property sales, house & land). Both share the validation in
-`src/lib/enquiry.ts` and **currently only write the submission to the server
-log** — wire them to your CRM, a transactional email, or a database before
-launch. Each endpoint is marked with a `NOTE:` comment.
+**Enquiry forms.** Every form on the site is a `<EnquiryForm>` posting to
+`/api/enquiry`, tagged with a `source` naming the page it came from. Validation
+lives in `src/lib/enquiry.ts`. The endpoint **currently only writes the
+submission to the server log** — wire it to your CRM, a transactional email, or
+a database before launch; it is marked with a `NOTE:` comment.
 
 **Motion.** Sections animate in as they scroll into view. `src/components/Reveal.tsx`
 is an IntersectionObserver wrapper; the hidden state ships in the server-rendered
@@ -83,9 +82,12 @@ plain CSS `rise-in` cascade instead, so it plays before hydration.
 ~2.1:1 on cream. Link text uses `--color-amber-ink` instead, which clears 4.5:1
 on every surface it sits on. `npm run check:contrast` enforces this.
 
-**Missing media.** The Boutique Chevron Island renders were not part of the
-design export, so those gallery slots show labelled placeholders — see
-`public/assets/README.md` for how to fill them in.
+**Boutique Chevron Island.** The live page embeds the project's own marketing
+site in an iframe (`astonishing-blini-0f41a7.netlify.app`) rather than holding
+the content itself. The copy is transcribed from there and the renders were
+extracted from the same bundle into `public/assets/boutique/` — see
+`public/assets/README.md`. The project site's "watch the film" button has no
+film behind it (the source marks it as a placeholder), so it is not reproduced.
 
 ## Content
 
@@ -109,6 +111,9 @@ in `pages.ts`:
 
 The live footer also links "FAQs" and "Website terms of use" to pages that do
 not exist. Those links are omitted here rather than pointed at invented content.
+
+Boutique Chevron Island renders are local files under `public/assets/boutique/`;
+everything else is served from the live site's Wix media host.
 
 ## Checks
 
