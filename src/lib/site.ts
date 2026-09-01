@@ -9,6 +9,9 @@
 
 export const site = {
   name: "QLand Property",
+  /** Canonical origin. Used for metadata and for the Aleesa lead origin. */
+  url: "https://qland.com.au",
+  host: "qland.com.au",
   phone: "0423 584 690",
   phoneHref: "tel:0423584690",
   email: "info@qland.com.au",

@@ -46,10 +46,19 @@ output `.next`). The only optional setting is the environment variable below.
 
 | Variable | Required | Purpose |
 |---|---|---|
-| `ANTHROPIC_API_KEY` | No | Powers the site assistant via `/api/chat`. Without it the widget still opens and answers with the "call us / book a call" fallback. |
+| `ALEESA_WEBHOOK_URL` | No | Aleesa webhook server origin. With `ALEESA_WEBCHAT_API_KEY`, the site assistant is Aleesa Web Chat. |
+| `ALEESA_WEBCHAT_API_KEY` | No | Aleesa Web Chat tenant key. Server-only secret. |
+| `ALEESA_API_URL` | No | Aleesa API origin (`https://api.aleesa.ai`) — a different host from the webhook one. |
+| `ALEESA_WEBSITE_FORM_API_KEY` | No | Aleesa Website Form key. Set it and every enquiry is filed in the Aleesa CRM. Server-only secret. |
+| `ANTHROPIC_API_KEY` | No | Fallback assistant, used only when the two `ALEESA_WEBCHAT` variables are unset. |
 
-Copy `.env.example` to `.env.local` for local development, and add the same key
-under **Project → Settings → Environment Variables** in Vercel.
+None are required to run the site — without them the widget answers with the
+"call us / book a call" fallback and enquiries are only written to the server
+log. Set the Aleesa variables before launch; logs are not durable storage.
+
+Copy `.env.example` to `.env.local` for local development, and add the same
+values under **Project → Settings → Environment Variables** in Vercel.
+`.env.example` carries the full setup steps for each Aleesa connection.
 
 ## Notes on the port
 
@@ -61,15 +70,31 @@ flash. The thresholds are declared as Tailwind breakpoints in
 
 **Site assistant.** The design called `window.claude.complete`, which only
 exists inside a Claude artifact. `/api/chat` replaces it with a server-side
-Anthropic Messages API call (`claude-opus-5`, low effort — replies are short) so
-the key is never exposed to the browser. Any API failure returns an empty reply
-and the widget shows the contact fallback rather than an error.
+call, so no key is ever exposed to the browser. Which assistant answers is
+decided in one place, `src/lib/chat/provider.ts`:
+
+1. **Aleesa Web Chat** — when `ALEESA_WEBHOOK_URL` and `ALEESA_WEBCHAT_API_KEY`
+   are set. Aleesa is *stateful*: it holds the transcript, the knowledge base
+   and the agent persona on its side, keyed by a `sessionId` the widget mints
+   once per visitor and keeps in `localStorage`. So only the newest visitor
+   turn is posted, and the bot is retrained in the Aleesa dashboard
+   (Knowledge Base + Chat Agent) rather than in this repo. Every conversation
+   lands in the Aleesa inbox, where a human can take over.
+2. **Claude** — when only `ANTHROPIC_API_KEY` is set. Stateless: the whole
+   conversation is replayed each turn against `assistantSystemPrompt` in
+   `src/lib/site.ts` (`claude-opus-5`, low effort — replies are short).
+3. **Neither** — the route answers with an empty reply.
+
+An empty reply is a valid answer at every layer, so any provider failure shows
+the widget's contact fallback rather than an error.
 
 **Enquiry forms.** Every form on the site is a `<EnquiryForm>` posting to
 `/api/enquiry`, tagged with a `source` naming the page it came from. Validation
-lives in `src/lib/enquiry.ts`. The endpoint **currently only writes the
-submission to the server log** — wire it to your CRM, a transactional email, or
-a database before launch; it is marked with a `NOTE:` comment.
+lives in `src/lib/enquiry.ts`. With `ALEESA_WEBSITE_FORM_API_KEY` set, the
+enquiry is filed in the Aleesa CRM as a Lead with source `website_form`
+(`src/lib/aleesa-leads.ts`); Aleesa builds the contact from the `full_name` and
+`email` field names, so those two keys are part of the contract. Without the
+key the submission is only written to the server log.
 
 **Motion.** Sections animate in as they scroll into view. `src/components/Reveal.tsx`
 is an IntersectionObserver wrapper; the hidden state ships in the server-rendered

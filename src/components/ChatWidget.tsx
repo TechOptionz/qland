@@ -13,12 +13,37 @@ const GREETING: Message = {
 const FALLBACK =
   "Thanks for your message! For a quick answer, call us on 0423 584 690 or book a free strategy session at calendly.com/qland-booking — our team will be in touch.";
 
+const SESSION_KEY = "qland_chat_session_id";
+
+/**
+ * A stable id for this visitor's conversation, reused across page loads.
+ *
+ * The Aleesa provider keys the transcript and the inbox thread on it, so a
+ * fresh id every turn would leave the bot with no memory and scatter one
+ * conversation across many threads. Providers that hold no state ignore it.
+ */
+function getSessionId(): string {
+  try {
+    const existing = window.localStorage.getItem(SESSION_KEY);
+    if (existing) return existing;
+    const created = `chat_${crypto.randomUUID()}`;
+    window.localStorage.setItem(SESSION_KEY, created);
+    return created;
+  } catch {
+    // Private mode / storage disabled: still usable, just not across reloads.
+    return `chat_${crypto.randomUUID()}`;
+  }
+}
+
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState(false);
   const [messages, setMessages] = useState<Message[]>([GREETING]);
   const bodyRef = useRef<HTMLDivElement>(null);
+  // Minted lazily on the first send: localStorage is browser-only, and doing
+  // it in an effect would set state during render for no benefit.
+  const sessionIdRef = useRef("");
 
   useEffect(() => {
     const el = bodyRef.current;
@@ -41,6 +66,10 @@ export default function ChatWidget() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           messages: next.map((m) => ({ role: m.role, text: m.text })),
+          // Read by the Aleesa provider so the conversation stays one thread
+          // in the inbox; ignored by providers that hold no state.
+          sessionId: (sessionIdRef.current ||= getSessionId()),
+          page: window.location.pathname,
         }),
       });
       if (res.ok) {
