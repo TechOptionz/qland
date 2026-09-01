@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
   openGraph: {
     url: "/contact",
-    title: "Contact Us — QLand Property",
+    title: "Contact Us · QLand Property",
     description:
       "Get in touch with the QLand Property team in Eight Mile Plains, Brisbane.",
   },
@@ -30,7 +30,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Get in touch"
         title="Contact us"
-        lede="Call, email, or send the form below — whichever suits. We answer every enquiry ourselves."
+        lede="Call, email, or send the form below, whichever suits. We answer every enquiry ourselves."
         image={photos.facadeEvening}
         ctas={[
           { label: `Call ${site.phone}`, href: site.phoneHref, external: true },

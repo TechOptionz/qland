@@ -13,11 +13,11 @@ import { photos, site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Buyers Agency",
   description:
-    "Exclusive listings, expert Brisbane market insight, and skilled negotiation. QLand's buyers agents act for you — never the seller.",
+    "Exclusive listings, expert Brisbane market insight, and skilled negotiation. QLand's buyers agents act for you, never the seller.",
   alternates: { canonical: "/buyers-agency" },
   openGraph: {
     url: "/buyers-agency",
-    title: "Buyers Agency — QLand Property",
+    title: "Buyers Agency · QLand Property",
     description:
       "Why use a buyer's agent: exclusive properties, a tailored search, expert market insight, and negotiation that works for you.",
   },

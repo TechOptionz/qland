@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/house-and-land" },
   openGraph: {
     url: "/house-and-land",
-    title: "House and Land — QLand Property",
+    title: "House and Land · QLand Property",
     description:
       "We source and negotiate the block, you choose the floorplan. Fixed pricing and luxury inclusions as standard.",
   },
@@ -185,7 +185,7 @@ export default function HouseAndLandPage() {
           <EnquiryForm
             source="house-and-land"
             submitLabel="Check my options"
-            successMessage="Thank you — we will be in touch shortly with the options that fit your budget."
+            successMessage="Thank you. We will be in touch shortly with the options that fit your budget."
             fields={[
               { name: "firstName", label: "First name", autoComplete: "given-name" },
               { name: "lastName", label: "Last name", autoComplete: "family-name" },
@@ -206,7 +206,7 @@ export default function HouseAndLandPage() {
       <CtaBand
         eyebrow="Next step?"
         title="Schedule your Free Consult"
-        body="Talk it through with our team — no obligation, and no cost."
+        body="Talk it through with our team. No obligation, and no cost."
       />
 
       <SiteFooter />

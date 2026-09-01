@@ -14,11 +14,11 @@ import { contacts, photos } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Property Management",
   description:
-    "Fair prices, guaranteed. Long-term property management across Brisbane and South East Queensland — contact us to save 3% off management fees.",
+    "Fair prices, guaranteed. Long-term property management across Brisbane and South East Queensland. Contact us to save 3% off management fees.",
   alternates: { canonical: "/property-management" },
   openGraph: {
     url: "/property-management",
-    title: "Property Management — QLand Property",
+    title: "Property Management · QLand Property",
     description:
       "Management that protects your investment and keeps good tenants in place. Fair prices, guaranteed.",
   },

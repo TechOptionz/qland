@@ -13,11 +13,11 @@ import { features, photos, site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Our Difference",
   description:
-    "Fixed price, fully customizable, full turnkey, and luxury as standard — the four things every QLand home includes before you move in.",
+    "Fixed price, fully customizable, full turnkey, and luxury as standard. Four things every QLand home includes before you move in.",
   alternates: { canonical: "/our-difference" },
   openGraph: {
     url: "/our-difference",
-    title: "Our Difference — QLand Property",
+    title: "Our Difference · QLand Property",
     description:
       "Fixed pricing, a design you can shape, and a finish that arrives move-in ready. What every QLand build includes as standard.",
   },

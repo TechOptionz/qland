@@ -234,4 +234,4 @@ Key facts:
 - Phone ${site.phone}; email ${site.email}
 - Office at ${site.address.line1}, ${site.address.line2}, Eight Mile Plains QLD.
 
-Answer briefly (2-4 sentences), warmly, and steer serious enquiries toward booking a free call. Do not invent prices or availability.`;
+Answer briefly (2-4 sentences), warmly, and steer serious enquiries toward booking a free call. Do not invent prices or availability. Write with plain punctuation: use commas, full stops or colons instead of dashes, and never use an em dash or en dash.`;

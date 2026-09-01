@@ -12,7 +12,7 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   metadataBase: new URL("https://qland.com.au"),
   title: {
-    default: "QLand Property — Buyer Centric Agency",
+    default: "QLand Property · Buyer Centric Agency",
     template: "%s · QLand Property",
   },
   description:
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "QLand Property",
-    title: "QLand Property — Buyer Centric Agency",
+    title: "QLand Property · Buyer Centric Agency",
     description:
       "A seamless home buying journey. QLand delivers expert support through buying, renting, and long-term property management.",
   },

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/reviews" },
   openGraph: {
     url: "/reviews",
-    title: "Reviews — QLand Property",
+    title: "Reviews · QLand Property",
     description:
       "Every review published on our Google Business profile, from clients we have bought, built, or managed for.",
   },

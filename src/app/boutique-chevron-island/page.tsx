@@ -14,11 +14,11 @@ export const metadata: Metadata = {
   // Renders as "Boutique Chevron Island · QLand Property" via the root template.
   title: "Boutique Chevron Island",
   description:
-    "BOUTIQUE — a luxury collection of 42 resident-only apartments on Chevron Island, Gold Coast. Two and three-bedroom residences from $1,220,000.",
+    "BOUTIQUE is a luxury collection of 42 resident-only apartments on Chevron Island, Gold Coast. Two and three-bedroom residences from $1,220,000.",
   alternates: { canonical: "/boutique-chevron-island" },
   openGraph: {
     url: "/boutique-chevron-island",
-    title: "Boutique Chevron Island — Gold Coast",
+    title: "Boutique Chevron Island · Gold Coast",
     description:
       "42 resident-only residences by Draycon and BDA Architects, moments from HOTA and Surfers Paradise. Register for pricing, floor plans, and private inspections.",
     images: [{ url: boutique.images.aerialTower }],
@@ -264,7 +264,7 @@ export default function BoutiqueChevronIslandPage() {
             <EnquiryForm
               source="boutique-chevron-island"
               submitLabel="Enquire now"
-              successMessage="Thank you — our sales team will be in touch with pricing, floor plans, and inspection times."
+              successMessage="Thank you. Our sales team will be in touch with pricing, floor plans, and inspection times."
               fields={[
                 { name: "name", label: "Full name", autoComplete: "name" },
                 { name: "email", label: "Email", type: "email", autoComplete: "email" },
@@ -284,7 +284,7 @@ export default function BoutiqueChevronIslandPage() {
                   name: "budget",
                   label: "Budget",
                   type: "select",
-                  options: ["$1.2M – $1.5M", "$1.5M – $2M", "$2M – $2.5M", "$2.5M – $3.5M+"],
+                  options: ["$1.2M to $1.5M", "$1.5M to $2M", "$2M to $2.5M", "$2.5M to $3.5M+"],
                 },
                 {
                   name: "buyerType",

@@ -141,7 +141,7 @@ export const buyersAgency = {
     {
       num: "04",
       title: "Skilled Negotiation",
-      body: "Leave negotiations to us — our experience ensures you get the best deal and favourable terms.",
+      body: "Leave negotiations to us. Our experience ensures you get the best deal and favourable terms.",
     },
     {
       num: "05",
@@ -161,7 +161,7 @@ export const buyersAgency = {
     {
       num: "08",
       title: "Professional Network",
-      body: "Access top-notch service from our network of professionals — lenders, inspectors, and attorneys.",
+      body: "Access top-notch service from our network of professionals, including lenders, inspectors, and attorneys.",
     },
   ],
   investors: {
@@ -317,7 +317,7 @@ export const boutique = {
       eyebrow: "One of a kind, by design",
       title: "Inspiring design enhances simple pleasures.",
       paragraphs: [
-        "Designed by award-winning BDA Architects, BOUTIQUE is characterised by striking architecture and open-plan spaces that maximise waterfront and skyline views — an aesthetic that encourages residents to embrace work, play and wellness.",
+        "Designed by award-winning BDA Architects, BOUTIQUE is characterised by striking architecture and open-plan spaces that maximise waterfront and skyline views, an aesthetic that encourages residents to embrace work, play and wellness.",
       ],
       image: `${RENDER}/living.jpg`,
       alt: "Open-plan living room with floor-to-ceiling glazing",
@@ -327,7 +327,7 @@ export const boutique = {
       title: "A kitchen crafted like fine furniture.",
       paragraphs: [
         "Detailed joinery greets you on arrival. Pale stone benchtops and splashbacks encase world-class European SMEG appliances, while thoughtful storage and clever accent lighting keep your space clean and minimal.",
-        "The residences are sleek, minimal and speak a contemporary language — a high level of detail creating a vision that is inviting, clear and confident.",
+        "The residences are sleek, minimal and speak a contemporary language, with a high level of detail creating a vision that is inviting, clear and confident.",
       ],
       image: `${RENDER}/kitchen.jpg`,
       alt: "Kitchen with stone island bench, pendant lighting and integrated appliances",
@@ -336,8 +336,8 @@ export const boutique = {
       eyebrow: "Elegant style",
       title: "Each room, a sanctuary of calm.",
       paragraphs: [
-        "There is a clear focus on every detail, no matter how small — making each space feel considered and special, promoting health and wellbeing.",
-        "Refined and precisely crafted, your bathroom is a work of art — pairing subtle timbers with stone benchtops, porcelain tiles and gunmetal fixtures.",
+        "There is a clear focus on every detail, no matter how small, making each space feel considered and special, promoting health and wellbeing.",
+        "Refined and precisely crafted, your bathroom is a work of art, pairing subtle timbers with stone benchtops, porcelain tiles and gunmetal fixtures.",
       ],
       image: `${RENDER}/bathroom.jpg`,
       alt: "Bathroom with stone benchtop, timber joinery and gunmetal fixtures",
@@ -347,7 +347,7 @@ export const boutique = {
   wellness: {
     eyebrow: "Work, play & wellness",
     title: "A life you won’t need to vacation from.",
-    body: "BOUTIQUE heralds a new era of apartment living — a communal leisure level with modern co-working space, an east-facing yoga deck, pool, spa, gymnasium and a shared rooftop zen herb garden. Balanced areas for work, play and wellness, all at the press of the elevator button.",
+    body: "BOUTIQUE heralds a new era of apartment living, featuring a communal leisure level with modern co-working space, an east-facing yoga deck, pool, spa, gymnasium and a shared rooftop zen herb garden. Balanced areas for work, play and wellness, all at the press of the elevator button.",
     amenities: [
       "Communal leisure level",
       "Modern co-working space",
@@ -362,7 +362,7 @@ export const boutique = {
   location: {
     eyebrow: "The location",
     title: "A stone’s throw from everything.",
-    body: "Moments from the city’s cultural heart, HOTA, and the Gold Coast’s holiday playground, Surfers Paradise. Swim, surf, dine and relax on one of Australia’s most pristine beaches — then come home to calm.",
+    body: "Moments from the city’s cultural heart, HOTA, and the Gold Coast’s holiday playground, Surfers Paradise. Swim, surf, dine and relax on one of Australia’s most pristine beaches, then come home to calm.",
     distances: [
       { value: "400m", label: "Local cafés" },
       { value: "650m", label: "HOTA access" },
@@ -382,7 +382,7 @@ export const boutique = {
 
   displaySuite: {
     label: "Display suite",
-    lines: ["Shop 3, 46–50 Thomas Drive", "Chevron Island, QLD 4217"],
+    lines: ["Shop 3, 46-50 Thomas Drive", "Chevron Island, QLD 4217"],
   },
 
   creators: [

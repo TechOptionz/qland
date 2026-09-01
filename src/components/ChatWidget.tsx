@@ -11,7 +11,7 @@ const GREETING: Message = {
 };
 
 const FALLBACK =
-  "Thanks for your message! For a quick answer, call us on 0423 584 690 or book a free strategy session at calendly.com/qland-booking — our team will be in touch.";
+  "Thanks for your message! For a quick answer, call us on 0423 584 690 or book a free strategy session at calendly.com/qland-booking. Our team will be in touch.";
 
 const SESSION_KEY = "qland_chat_session_id";
 

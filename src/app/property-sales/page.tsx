@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/property-sales" },
   openGraph: {
     url: "/property-sales",
-    title: "Property Sales — QLand Property",
+    title: "Property Sales · QLand Property",
     description:
       "Thinking of selling? Share a few details and we will come back with a price quote.",
   },

@@ -13,11 +13,11 @@ import { contacts, photos, site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "QLand Property buys, builds, and manages property across Brisbane and South East Queensland — buyers agency, house and land, and long-term management.",
+    "QLand Property buys, builds, and manages property across Brisbane and South East Queensland. Buyers agency, house and land, and long-term management.",
   alternates: { canonical: "/about" },
   openGraph: {
     url: "/about",
-    title: "About Us — QLand Property",
+    title: "About Us · QLand Property",
     description:
       "What we do: buyers agency, building, property management, and clear guidance for owner-occupiers.",
   },
@@ -32,7 +32,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About Us"
         title="Buying, building, and managing property in South East Queensland"
-        lede="One team across the whole journey — finding the property, building the home, and looking after it once you own it."
+        lede="One team across the whole journey, from finding the property to building the home and looking after it once you own it."
         image={photos.clientsOutdoors}
         ctas={[
           { label: "Schedule a free call", href: site.calendly, external: true },
@@ -153,7 +153,7 @@ export default function AboutPage() {
 
       <CtaBand
         title="Start with a free strategy session"
-        body="Tell us where you are up to and we will map out the next step — buying, building, or managing."
+        body="Tell us where you are up to and we will map out the next step, whether you are buying, building, or managing."
       />
 
       <SiteFooter />

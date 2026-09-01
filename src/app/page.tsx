@@ -13,14 +13,14 @@ export const metadata: Metadata = {
   // `absolute` opts out of the "%s · QLand Property" template — the brand is
   // already in the title, and the home page should not read as a sub-page.
   title: {
-    absolute: "QLand Property — Buyer Centric Agency in Brisbane",
+    absolute: "QLand Property · Buyer Centric Agency in Brisbane",
   },
   description:
     "Buying, building, and managing property across Brisbane and South East Queensland. Fixed-price, full-turnkey homes, expert buyers agency support, and long-term property management.",
   alternates: { canonical: "/" },
   openGraph: {
     url: "/",
-    title: "QLand Property — Buyer Centric Agency in Brisbane",
+    title: "QLand Property · Buyer Centric Agency in Brisbane",
     description:
       "A seamless home buying journey. QLand delivers expert support through buying, renting, and long-term property management.",
   },
