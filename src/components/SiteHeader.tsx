@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { mainLinks, serviceLinks } from "@/lib/site";
-import logo from "../../public/assets/qland-logo.png";
+import logo from "../../public/assets/qland-logo-trimmed.png";
 
 /** Entries shown before the Services dropdown, and after it. */
 const BEFORE = mainLinks.slice(0, 2); // Home, Our Difference
@@ -88,7 +88,7 @@ export default function SiteHeader() {
           alt="QLand Property"
           priority
           className={`w-auto transition-[height] duration-300 ease-out ${
-            scrolled ? "h-10" : "h-12"
+            scrolled ? "h-11" : "h-[52px]"
           }`}
         />
       </Link>
