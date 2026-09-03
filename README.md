@@ -20,8 +20,47 @@ project (`Qland Home.dc.html` and `Boutique Chevron Island.dc.html`).
 | `/boutique-chevron-island` | BOUTIQUE project page: hero, key facts, three design bands, amenity, location, enquiry form, creators, disclaimer |
 | `not-found` | Themed 404 with links back into the site |
 
-Every page sets its own `title`, `description`, canonical URL, and Open Graph
-block; the root layout supplies the `%s · QLand Property` title template.
+Every page sets its own `title`, `description`, canonical URL, Open Graph and
+Twitter card block; the root layout supplies the `%s · QLand Property` title
+template.
+
+## Search, answer engines, and structured data
+
+Three generated routes, plus a schema.org graph on every page. None of it
+duplicates page copy by hand — it is all derived from `src/lib/site.ts` and
+`src/lib/pages.ts`, so it cannot drift from what the pages actually say.
+
+| Route | Source | Purpose |
+|---|---|---|
+| `/sitemap.xml` | `src/app/sitemap.ts` | Every route, with relative priorities. Add a route here when you add a page. |
+| `/robots.txt` | `src/app/robots.ts` | Opens the site to search *and* AI crawlers by name, disallows `/api/`, points at the sitemap. |
+| `/llms.txt` | `src/app/llms.txt/route.ts` | The [llmstxt.org](https://llmstxt.org) brief: the business, services, estates, contacts, and page index as plain text. |
+
+`src/lib/schema.ts` builds the JSON-LD. The root layout emits the stable
+`Organization` (a `RealEstateAgent` + `HomeAndConstructionBusiness`) and
+`WebSite` nodes once; each page emits its own `WebPage`/`BreadcrumbList` and
+refers back by `@id`. Pages add what they are actually about:
+
+- `/house-and-land` — `Service`, an `ItemList` of the six estates, and the
+  five-step process as a `HowTo`.
+- `/buyers-agency`, `/property-management`, `/property-sales` — `Service`, with
+  the eight buyer's-agent reasons as an `OfferCatalog`.
+- `/boutique-chevron-island` — the development as `Product` + `ApartmentComplex`
+  with the amenity list, unit count, address, and the "from $1,220,000"
+  `AggregateOffer`.
+- `/contact` — `ContactPage` + `LocalBusiness`; `/about` — `AboutPage`;
+  `/reviews` — `CollectionPage` + the reviews as an `ItemList`.
+
+Two things to keep an eye on:
+
+- **The rating is asserted, not fetched.** The `aggregateRating` on the
+  organisation says 5.0 across `site.reviews`, which is what `/reviews`
+  already claims in its own copy. Keep it in step with the live Google Business
+  Profile. Google does not show star snippets for a business reviewing itself,
+  so this earns knowledge-graph and answer-engine value, not stars in results.
+- **Postcode.** `site.ts` gives the office as Eight Mile Plains 4113 and the
+  privacy policy text says 4122. The structured data uses 4113. Worth settling
+  in the copy, since an inconsistent NAP weakens local ranking.
 
 ## Stack
 
