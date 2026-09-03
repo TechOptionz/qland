@@ -223,6 +223,81 @@ export const reviews = [
   },
 ] as const;
 
+/* ---------------------------------------------------------------------------
+   Technology partner
+   --------------------------------------------------------------------------- */
+
+/**
+ * KEYOB is an independent provider, not a QLand service. Every string below
+ * keeps the two apart: QLand handles the property, KEYOB handles the
+ * technology, and `disclaimer` says so on the page. No discount figure is
+ * quoted anywhere — do not add one here without one being agreed.
+ */
+export const technologyPartner = {
+  /** Anchor for the home-page band, so it can be linked to directly. */
+  id: "technology-partner",
+  lockup: "QLand × KEYOB",
+  eyebrow: "Technology partner",
+
+  heading: "We build your property. KEYOB builds your business systems.",
+  lede: "Plenty of our clients run a business alongside their property. We have partnered with KEYOB, an Australian software, AI and digital marketing team based in Springwood, so they have a trusted place to turn for the technology side of it: websites, AI assistants, automation, and the systems that tie them together.",
+
+  capabilities: [
+    "AI & Automation",
+    "Custom Software",
+    "Website Design",
+    "CRM Setup",
+    "System Integrations",
+    "ERP Systems",
+    "Dashboards & Reporting",
+    "Mobile Apps",
+  ],
+
+  benefits: [
+    {
+      title: "Stop losing enquiries",
+      body: "Every call, email and web enquiry answered and captured, including after hours and weekends.",
+    },
+    {
+      title: "Less manual admin",
+      body: "Automate the repetitive work your team is still doing by hand, and give those hours back.",
+    },
+    {
+      title: "Systems that talk to each other",
+      body: "Connect the tools you already use so information flows without anyone re-typing it.",
+    },
+    {
+      title: "Numbers you can trust",
+      body: "Clean, connected data means you and your accountant are always working from the same figures.",
+    },
+  ],
+
+  cta: {
+    heading: "Ready to look at your systems?",
+    body: "Book a chat with KEYOB directly, or mention QLand when you get in touch and they will pick it up from there.",
+    primary: {
+      label: "Talk to KEYOB",
+      href: "https://www.keyob.com/contact#contact",
+    },
+    secondary: { label: "Visit keyob.com", href: "https://www.keyob.com" },
+  },
+
+  disclaimer:
+    "KEYOB is an independent technology provider. Any engagement is between you and KEYOB, and is separate from the property services provided by QLand.",
+
+  /**
+   * Two colourways of the same wordmark: white for the ink bands, navy for the
+   * cream ones. Supplied by KEYOB; do not recolour them.
+   */
+  logo: {
+    white: { src: "/assets/partners/keyob-wordmark-white.png", width: 223, height: 47 },
+    navy: { src: "/assets/partners/keyob-wordmark-navy.png", width: 219, height: 44 },
+    alt: "KEYOB",
+  },
+
+  partnerLabel: "In partnership with",
+} as const;
+
 /** System prompt for the site assistant. Kept here so the copy lives with the rest of the content. */
 export const assistantSystemPrompt = `You are the friendly website assistant for Qland Property, a Brisbane buyers agency and builder (House and Land packages, Buyers Agency, Property Management, Property Sales).
 

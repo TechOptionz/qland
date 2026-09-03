@@ -6,6 +6,7 @@ import HeroVideo from "@/components/HeroVideo";
 import JsonLd from "@/components/JsonLd";
 import Reveal from "@/components/Reveal";
 import SiteHeader from "@/components/SiteHeader";
+import TechnologyPartner from "@/components/TechnologyPartner";
 import TopBar from "@/components/TopBar";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ORG_ID, pageGraph } from "@/lib/schema";
@@ -258,6 +259,9 @@ export default function HomePage() {
             </Reveal>
           </div>
         </section>
+
+        {/* Technology partner */}
+        <TechnologyPartner />
 
         {/* Featured project banner */}
         <section id="boutique" className="gutter-x pb-[clamp(56px,8vw,110px)]">
