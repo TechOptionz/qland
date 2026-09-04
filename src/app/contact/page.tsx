@@ -22,7 +22,12 @@ export const metadata: Metadata = {
     url: "/contact",
     title: "Contact Us · QLand Property",
     description: SOCIAL_DESCRIPTION,
-    images: [{ url: photos.facadeEvening, alt: "A QLand home photographed in the evening" }],
+    images: [
+      {
+        url: photos.facadeEvening,
+        alt: "A QLand home photographed in the evening",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -61,8 +66,17 @@ export default function ContactPage() {
           lede="Call, email, or send the form below, whichever suits. We answer every enquiry ourselves."
           image={photos.facadeEvening}
           ctas={[
-            { label: `Call ${site.phone}`, href: site.phoneHref, external: true },
-            { label: "Book a free call", href: site.calendly, external: true, variant: "ghost" },
+            {
+              label: `Call ${site.phone}`,
+              href: site.phoneHref,
+              external: true,
+            },
+            {
+              label: "Book a free call",
+              href: site.calendly,
+              external: true,
+              variant: "ghost",
+            },
           ]}
         />
 
@@ -82,7 +96,9 @@ export default function ContactPage() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <span className="eyebrow text-amber-dark">General enquiries</span>
+                <span className="eyebrow text-amber-dark">
+                  General enquiries
+                </span>
                 <a
                   href={site.emailHref}
                   className="text-[14.5px] font-bold text-body-strong hover:text-amber-dark"
@@ -110,7 +126,10 @@ export default function ContactPage() {
                       {person.role}
                     </span>
                     <span className="mt-1 flex flex-col gap-0.5 text-[13.5px] font-semibold">
-                      <a href={person.phoneHref} className="text-body-strong hover:text-amber-dark">
+                      <a
+                        href={person.phoneHref}
+                        className="text-body-strong hover:text-amber-dark"
+                      >
                         {person.phone}
                       </a>
                       <a
@@ -144,12 +163,45 @@ export default function ContactPage() {
                 submitLabel="Submit"
                 successMessage="Thanks for submitting! We will be in touch shortly."
                 fields={[
-                  { name: "name", label: "Name", autoComplete: "name" },
-                  { name: "phone", label: "Phone", type: "tel", autoComplete: "tel" },
-                  { name: "email", label: "Email", type: "email", autoComplete: "email" },
-                  { name: "address", label: "Address", autoComplete: "street-address" },
-                  { name: "subject", label: "Subject", wide: true },
-                  { name: "message", label: "Message", type: "textarea", wide: true },
+                  {
+                    name: "name",
+                    label: "Name",
+                    placeholder: "Enter your name",
+                    autoComplete: "name",
+                  },
+                  {
+                    name: "phone",
+                    label: "Phone",
+                    type: "tel",
+                    placeholder: "Enter your phone number",
+                    autoComplete: "tel",
+                  },
+                  {
+                    name: "email",
+                    label: "Email",
+                    type: "email",
+                    placeholder: "Enter your email address",
+                    autoComplete: "email",
+                  },
+                  {
+                    name: "address",
+                    label: "Address",
+                    placeholder: "Enter your address",
+                    autoComplete: "street-address",
+                  },
+                  {
+                    name: "subject",
+                    label: "Subject",
+                    placeholder: "Enter a subject",
+                    wide: true,
+                  },
+                  {
+                    name: "message",
+                    label: "Message",
+                    type: "textarea",
+                    placeholder: "Enter your message",
+                    wide: true,
+                  },
                 ]}
               />
             </Reveal>

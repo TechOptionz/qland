@@ -68,7 +68,16 @@ export const metadata: Metadata = {
   // Stops iOS Safari from auto-linking (and restyling) the address and phone
   // numbers in the top bar and footer, which are already real links.
   formatDetection: { telephone: false, address: false, email: false },
-  icons: { icon: "/assets/qland-logo.png", apple: "/assets/qland-logo.png" },
+  // The favicon is the house mark on its own — the full lockup's wordmark is
+  // illegible once scaled down to a 16px tab icon.
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "16x16 32x32 48x48" },
+      { url: "/assets/qland-icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/assets/qland-icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: { url: "/assets/qland-apple-icon.png", sizes: "180x180" },
+  },
 };
 
 export const viewport: Viewport = {

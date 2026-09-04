@@ -20,6 +20,9 @@ export type FormField = {
     | "message";
   label: string;
   type?: "text" | "email" | "tel" | "textarea" | "select";
+  /** Example input shown in the empty control. Ignored by `select`, which
+   *  already shows a "Please choose…" option. */
+  placeholder?: string;
   autoComplete?: string;
   options?: readonly string[];
   /** Spans the full width of the grid rather than one column. */
@@ -94,7 +97,7 @@ export default function EnquiryForm({
     );
   }
 
-  const controlClass = `w-full rounded-xl px-[18px] py-[15px] text-sm outline-none transition-[box-shadow,background-color] duration-200 ${
+  const controlClass = `w-full rounded-xl px-[18px] py-[15px] text-sm outline-none transition-[box-shadow,background-color] duration-200 placeholder:text-body ${
     dark
       ? "border-none bg-cream focus:bg-white focus:ring-2 focus:ring-ink/30"
       : "border border-line bg-white focus:border-amber focus:ring-2 focus:ring-amber/30"
@@ -132,6 +135,7 @@ export default function EnquiryForm({
                   id={id}
                   name={field.name}
                   rows={5}
+                  placeholder={field.placeholder}
                   value={value}
                   onChange={(e) => set(e.target.value)}
                   className={`${controlClass} resize-y`}
@@ -157,6 +161,7 @@ export default function EnquiryForm({
                   name={field.name}
                   type={type}
                   autoComplete={field.autoComplete}
+                  placeholder={field.placeholder}
                   value={value}
                   onChange={(e) => set(e.target.value)}
                   className={controlClass}
